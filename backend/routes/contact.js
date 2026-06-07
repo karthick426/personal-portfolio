@@ -4,12 +4,17 @@ import db from '../config/db.js';
 
 const router = express.Router();
 
-// Config transporter
+// Config transporter — using port 587 (STARTTLS) since Railway blocks port 465
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, // STARTTLS (upgrades to TLS after connection)
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 });
 
