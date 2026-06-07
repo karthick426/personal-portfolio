@@ -89,11 +89,11 @@ const projectEnhancements = {
   }
 };
 
-// Start Server
-const PORT = process.env.PORT || 5000;
+// Start const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, async () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
+});
 
   try {
     console.log('Skipping admin password update.');
