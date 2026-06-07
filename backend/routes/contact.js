@@ -67,8 +67,14 @@ router.post('/', async (req, res) => {
       `
     };
 
-    transporter.sendMail(mailOptions).catch(emailErr => {
-      console.error('Failed to send contact notification email:', emailErr);
+    transporter.sendMail(mailOptions).then(info => {
+      console.log('✅ Email sent successfully! ID:', info.messageId);
+    }).catch(emailErr => {
+      console.error('❌ Email send failed!');
+      console.error('   Code:', emailErr.code);
+      console.error('   Message:', emailErr.message);
+      console.error('   EMAIL_USER set:', !!process.env.EMAIL_USER);
+      console.error('   EMAIL_PASS set:', !!process.env.EMAIL_PASS);
     });
 
     res.status(201).json({ success: true, message: 'Message sent successfully', id: result.insertId });
