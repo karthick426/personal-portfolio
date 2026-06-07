@@ -1,22 +1,37 @@
 import express from 'express';
-import nodemailer from 'nodemailer';
 import db from '../config/db.js';
 
 const router = express.Router();
 
-// Config transporter — using port 587 (STARTTLS) since Railway blocks port 465
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, // STARTTLS (upgrades to TLS after connection)
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
+// Send email via Resend API (HTTPS) — Railway blocks SMTP ports 465/587
+async function sendEmail({ to, subject, html }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn('⚠️ RESEND_API_KEY not set — skipping email notification');
+    return;
   }
-});
+
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to,
+      subject,
+      html
+    })
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || 'Resend API error');
+  }
+  return data;
+}
+
 
 // POST /api/contact
 router.post('/', async (req, res) => {
@@ -32,10 +47,9 @@ router.post('/', async (req, res) => {
       [name, email, subject, message]
     );
 
-    // Send email notification (asynchronously in background)
-    const mailOptions = {
-      from: `"Portfolio Contact Form" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_TO,
+    // Send email notification via Resend API (asynchronously)
+    sendEmail({
+      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
       subject: `New Portfolio Message: ${subject}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
@@ -44,42 +58,25 @@ router.post('/', async (req, res) => {
           </div>
           <div style="padding: 24px; background-color: #ffffff; color: #333333; line-height: 1.6;">
             <p style="margin-top: 0;">You have received a new message from your portfolio website's contact form.</p>
-            
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-              <tr>
-                <td style="padding: 8px 0; font-weight: bold; color: #475569; width: 100px;">Name:</td>
-                <td style="padding: 8px 0; color: #0f172a;">${name}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; font-weight: bold; color: #475569;">Email:</td>
-                <td style="padding: 8px 0; color: #0f172a;"><a href="mailto:${email}" style="color: #0284c7; text-decoration: none;">${email}</a></td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; font-weight: bold; color: #475569;">Subject:</td>
-                <td style="padding: 8px 0; color: #0f172a;">${subject}</td>
-              </tr>
+              <tr><td style="padding: 8px 0; font-weight: bold; color: #475569; width: 100px;">Name:</td><td style="padding: 8px 0; color: #0f172a;">${name}</td></tr>
+              <tr><td style="padding: 8px 0; font-weight: bold; color: #475569;">Email:</td><td style="padding: 8px 0; color: #0f172a;"><a href="mailto:${email}" style="color: #0284c7;">${email}</a></td></tr>
+              <tr><td style="padding: 8px 0; font-weight: bold; color: #475569;">Subject:</td><td style="padding: 8px 0; color: #0f172a;">${subject}</td></tr>
             </table>
-
             <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; margin-top: 20px;">
-              <h4 style="margin: 0 0 10px 0; color: #475569; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Message Details</h4>
-              <p style="margin: 0; white-space: pre-wrap; color: #1e293b; font-size: 15px;">${message}</p>
+              <h4 style="margin: 0 0 10px 0; color: #475569; font-size: 14px;">Message</h4>
+              <p style="margin: 0; white-space: pre-wrap; color: #1e293b;">${message}</p>
             </div>
           </div>
           <div style="background-color: #f1f5f9; padding: 16px; text-align: center; border-top: 1px solid #e2e8f0;">
-            <p style="margin: 0; font-size: 12px; color: #64748b;">This notification was automatically sent by your personal portfolio backend server.</p>
+            <p style="margin: 0; font-size: 12px; color: #64748b;">Sent from your personal portfolio contact form.</p>
           </div>
         </div>
       `
-    };
-
-    transporter.sendMail(mailOptions).then(info => {
-      console.log('✅ Email sent successfully! ID:', info.messageId);
+    }).then(() => {
+      console.log('✅ Email sent successfully via Resend!');
     }).catch(emailErr => {
-      console.error('❌ Email send failed!');
-      console.error('   Code:', emailErr.code);
-      console.error('   Message:', emailErr.message);
-      console.error('   EMAIL_USER set:', !!process.env.EMAIL_USER);
-      console.error('   EMAIL_PASS set:', !!process.env.EMAIL_PASS);
+      console.error('❌ Resend email failed:', emailErr.message);
     });
 
     res.status(201).json({ success: true, message: 'Message sent successfully', id: result.insertId });
