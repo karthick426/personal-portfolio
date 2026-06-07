@@ -11,17 +11,60 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Terminal from '../components/Terminal';
 
+const DEFAULT_CONTENT = {
+  hero: {
+    name: 'Karthick V',
+    title: 'Full Stack Developer',
+    tagline: 'Building digital experiences that combine modern aesthetics with powerful engineering.'
+  },
+  about: {
+    bio: 'I am a passionate Computer Science and Engineering student at Shree Venkateshwara Hi-Tech Engineering College, pursuing my B.E. with a focus on modern web development and software engineering.'
+  },
+  personal_info: {
+    email: 'v.karthick406@gmail.com',
+    phone: '+91 8760466232',
+    github: 'http://github.com/karthick426',
+    linkedin: 'https://www.linkedin.com/in/v-karthick-579535301/',
+    location: '1/196G Washington Nagar, Tiruppur',
+    location_url: 'https://maps.app.goo.gl/ypn9P8x1QY8N2TdVA'
+  },
+  projects: []
+};
+
 const Home = () => {
   const [content, setContent] = useState(null);
 
   useEffect(() => {
+    // 5-second timeout — show default content if API unreachable
+    const timeout = setTimeout(() => {
+      setContent(DEFAULT_CONTENT);
+    }, 5000);
+
     fetch(`${API_BASE_URL}/api/content`)
       .then(res => res.json())
-      .then(data => setContent(data))
-      .catch(err => console.error('Error fetching content:', err));
+      .then(data => {
+        clearTimeout(timeout);
+        setContent(data);
+      })
+      .catch(err => {
+        console.error('Error fetching content:', err);
+        clearTimeout(timeout);
+        setContent(DEFAULT_CONTENT);
+      });
+
+    return () => clearTimeout(timeout);
   }, []);
 
-  if (!content) return <div className="min-h-screen bg-black flex items-center justify-center text-neonCyan font-mono">Loading...</div>;
+  if (!content) return (
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center text-neonCyan font-mono gap-4">
+      <div className="flex gap-2">
+        <span className="w-2 h-2 bg-neonCyan rounded-full animate-bounce" style={{animationDelay: '0ms'}}></span>
+        <span className="w-2 h-2 bg-neonCyan rounded-full animate-bounce" style={{animationDelay: '150ms'}}></span>
+        <span className="w-2 h-2 bg-neonCyan rounded-full animate-bounce" style={{animationDelay: '300ms'}}></span>
+      </div>
+      <p className="text-sm opacity-60">Loading portfolio...</p>
+    </div>
+  );
 
   return (
     <div className="pt-20">
