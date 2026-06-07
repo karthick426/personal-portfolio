@@ -5,9 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "start": "vite preview --host 0.0.0.0 --port $PORT"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
