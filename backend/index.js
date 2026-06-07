@@ -37,11 +37,11 @@ app.get("/", (req, res) => {
     message: "Portfolio Backend Running"
   });
 });
-app.get('/api/force-sync', async (req, res) => {
+//app.get('/api/force-sync', async (req, res) => {
   try {
     const bcrypt = await import('bcrypt');
     const hashedPassword = await bcrypt.default.hash('admin123', 10);
-    await db.execute('UPDATE admins SET password = ? WHERE username = ?', [hashedPassword, 'admin']);
+    //await db.execute('UPDATE admins SET password = ? WHERE username = ?', [hashedPassword, 'admin']);
 
     const formattedProjects = [
       {
