@@ -12,9 +12,17 @@ import contentRoutes from './routes/content.js';
 dotenv.config();
 
 const app = express();
+app.use('/api/contact', contactRoutes);
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173"
+    ],
+    credentials: true
+  })
+);
 app.use(express.json());
 
 // Routes
@@ -23,6 +31,12 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/content', contentRoutes);
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Portfolio Backend Running"
+  });
+});
 app.get('/api/force-sync', async (req, res) => {
   try {
     const bcrypt = await import('bcrypt');
