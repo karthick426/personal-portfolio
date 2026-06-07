@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -45,7 +46,7 @@ const Admin = () => {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/contact');
+      const res = await fetch(`${API_BASE_URL}/api/contact`);
       if (res.ok) {
         const data = await res.json();
         setMessages(data);
@@ -58,7 +59,7 @@ const Admin = () => {
   const fetchStats = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('http://localhost:5000/api/admin/stats', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/stats`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -72,7 +73,7 @@ const Admin = () => {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/content');
+      const response = await fetch(`${API_BASE_URL}/api/content`);
       const data = await response.json();
       setContent({
         ...data,
@@ -86,7 +87,7 @@ const Admin = () => {
   const handleSaveProjects = async (updatedProjects) => {
     setSaveStatus('Saving projects...');
     try {
-      const response = await fetch('http://localhost:5000/api/content/projects', {
+      const response = await fetch(`${API_BASE_URL}/api/content/projects`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: updatedProjects })
@@ -176,7 +177,7 @@ const Admin = () => {
   const handleSaveContent = async (section) => {
     setSaveStatus('Saving...');
     try {
-      const response = await fetch(`http://localhost:5000/api/content/${section}`, {
+      const response = await fetch(`${API_BASE_URL}/api/content/${section}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: content[section] })
@@ -203,7 +204,7 @@ const Admin = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/admin/login', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })

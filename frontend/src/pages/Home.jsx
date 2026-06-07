@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from '../config';
 import About from '../components/About';
 import Skills from '../components/Skills';
 import Education from '../components/Education';
@@ -14,7 +15,7 @@ const Home = () => {
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/content')
+    fetch(`${API_BASE_URL}/api/content`)
       .then(res => res.json())
       .then(data => setContent(data))
       .catch(err => console.error('Error fetching content:', err));

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from '../config';
 
 const ProjectCard = ({ project, idx }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -135,7 +136,7 @@ const Projects = () => {
           setLoading(false);
         }
 
-        const response = await fetch('http://localhost:5000/api/content');
+        const response = await fetch(`${API_BASE_URL}/api/content`);
         if (response.ok) {
           const data = await response.json();
           const p = data.projects || [];

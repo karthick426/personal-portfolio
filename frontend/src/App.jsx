@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { API_BASE_URL } from './config';
 
 // Components
 import Navbar from './components/Navbar';
@@ -16,7 +17,7 @@ const VisitTracker = () => {
   useEffect(() => {
     // Only track if not in admin area
     if (!location.pathname.startsWith('/admin')) {
-      fetch('http://localhost:5000/api/analytics/visit', {
+      fetch(`${API_BASE_URL}/api/analytics/visit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ page_visited: location.pathname })
