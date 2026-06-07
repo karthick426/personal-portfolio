@@ -11,3 +11,4 @@ INSERT IGNORE INTO portfolio_content (section, content) VALUES
 ('hero', '{"name": "Karthick V", "title": "Full Stack Developer", "tagline": "Building digital experiences that combine modern aesthetics with powerful engineering."}'),
 ('about', '{"bio": "I am a passionate developer with expertise in React, Node.js, and modern web technologies. I love building beautiful and functional applications."}'),
 ('skills', '{"frontend": ["React", "JavaScript", "Tailwind CSS"], "backend": ["Node.js", "Express", "MySQL"]}');
+
