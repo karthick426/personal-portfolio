@@ -17,39 +17,82 @@ const Skills = () => {
     { name: "Figma", icon: "fab fa-figma text-[#f24e1e]" }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 16
+      }
+    }
+  };
+
   return (
     <section id="skills" className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
+        <div className="relative">
           {/* Section title */}
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+          <motion.h2 
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight"
+          >
             Tools I Build With
-          </h2>
+          </motion.h2>
           {/* Section subtitle */}
-          <p className="text-gray-400 max-w-xl mx-auto mb-14 text-sm md:text-base leading-relaxed">
+          <motion.p 
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-gray-400 max-w-xl mx-auto mb-14 text-sm md:text-base leading-relaxed"
+          >
             A curated set of technologies I rely on to build modern web experiences
-          </p>
+          </motion.p>
 
-          {/* Centered Pill Grid List */}
-          <div className="flex flex-wrap justify-center gap-3.5 max-w-4xl mx-auto">
+          {/* Centered Pill Grid List with Staggered Entrance */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-wrap justify-center gap-3.5 max-w-4xl mx-auto"
+          >
             {allSkills.map((skill, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ scale: 1.05, borderColor: "rgba(255, 255, 255, 0.2)", backgroundColor: "rgba(255, 255, 255, 0.08)" }}
-                transition={{ type: "spring", stiffness: 450, damping: 18 }}
-                className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm md:text-base cursor-pointer select-none transition-all duration-150"
+                variants={itemVariants}
+                whileHover={{ 
+                  y: -6, 
+                  scale: 1.05, 
+                  borderColor: "rgba(255, 255, 255, 0.35)", 
+                  backgroundColor: "rgba(255, 255, 255, 0.08)",
+                  boxShadow: "0 12px 24px -10px rgba(255, 255, 255, 0.15)"
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm md:text-base cursor-pointer select-none transition-colors duration-200"
               >
                 <i className={`${skill.icon} text-lg md:text-xl`}></i>
                 <span className="font-sans text-gray-200 font-normal">{skill.name}</span>
               </motion.div>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
