@@ -22,8 +22,34 @@ const About = ({ data, personalInfo }) => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="flex flex-col">
-              <p className="text-gray-400 text-lg leading-relaxed mb-8 whitespace-pre-wrap">
+            <div className="flex flex-col items-center md:items-start">
+
+              {/* Profile Image */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, type: 'spring', stiffness: 120 }}
+                className="relative mb-8 flex-shrink-0"
+              >
+                {/* Glowing ring behind image */}
+                <div className="absolute inset-0 rounded-full bg-[#10B981] blur-2xl opacity-20 scale-110" />
+                <div className="relative w-44 h-44 rounded-full border-2 border-[#10B981]/40 overflow-hidden shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+                  <img
+                    src="/profile.png"
+                    alt="Karthick V"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+                    }}
+                  />
+                </div>
+                {/* Online badge */}
+                <span className="absolute bottom-2 right-2 w-4 h-4 bg-[#10B981] rounded-full border-2 border-[#0A0A0A] animate-pulse" />
+              </motion.div>
+
+              {/* Bio text below image */}
+              <p className="text-gray-400 text-lg leading-relaxed whitespace-pre-wrap text-center md:text-left">
                 {data?.bio || "I am a passionate Computer Science and Engineering student at Shree Venkateshwara Hi-Tech Engineering College, pursuing my B.E. with a focus on modern web development and software engineering. I specialize in building responsive, interactive, and high-performance applications using React, Node.js, Express, and MySQL. With a strong foundation in core concepts like Data Structures, DBMS, and Web Technologies, combined with continuous learning in AI, Cloud Computing, and Prompt Engineering, I am dedicated to crafting clean code and premium digital solutions that solve real-world problems."}
               </p>
             </div>

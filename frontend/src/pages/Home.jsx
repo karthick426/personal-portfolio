@@ -13,7 +13,7 @@ import Terminal from '../components/Terminal';
 import BackgroundCanvas from '../components/BackgroundCanvas';
 import MagneticButton from '../components/MagneticButton';
 import TypewriterText from '../components/TypewriterText';
-import CountUp from '../components/CountUp';
+
 
 const DEFAULT_CONTENT = {
   hero: {
@@ -160,27 +160,6 @@ const Home = () => {
               </MagneticButton>
             </div>
 
-            {/* Animated Stat Counters */}
-            <div className="flex items-center gap-8 mb-10 border-t border-white/5 pt-6">
-              {[
-                { target: 5, suffix: '+', label: 'Projects' },
-                { target: 8, suffix: '+', label: 'Technologies' },
-                { target: 2, suffix: '+', label: 'Years' },
-              ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 + i * 0.15, duration: 0.5 }}
-                  className="text-center"
-                >
-                  <div className="text-3xl font-bold text-[#10B981] font-mono">
-                    <CountUp target={stat.target} suffix={stat.suffix} duration={2000} />
-                  </div>
-                  <div className="text-xs text-[#A1A1AA] font-sans mt-1">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
 
             {/* Horizontal Brand Tech stack sliding carousel (shows 3 at a time) */}
             <div className="flex items-center gap-3 overflow-hidden h-16 select-none">
