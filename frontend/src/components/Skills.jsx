@@ -68,24 +68,29 @@ const Skills = () => {
             viewport={{ once: true, margin: "-100px" }}
             className="flex flex-wrap justify-center gap-3.5 max-w-4xl mx-auto"
           >
-            {allSkills.map((skill, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ 
-                  y: -6, 
-                  scale: 1.05, 
-                  borderColor: "rgba(255, 255, 255, 0.35)", 
-                  backgroundColor: "rgba(255, 255, 255, 0.08)",
-                  boxShadow: "0 12px 24px -10px rgba(255, 255, 255, 0.15)"
-                }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm md:text-base cursor-pointer select-none transition-colors duration-200"
-              >
-                <i className={`${skill.icon} text-lg md:text-xl`}></i>
-                <span className="font-sans text-gray-200 font-normal">{skill.name}</span>
-              </motion.div>
-            ))}
+            {allSkills.map((skill, idx) => {
+              const floatClass = ['animate-float-a', 'animate-float-b', 'animate-float-c'][idx % 3];
+              const floatDelay = `${(idx * 0.18).toFixed(2)}s`;
+              return (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  whileHover={{ 
+                    y: -8, 
+                    scale: 1.08, 
+                    borderColor: "rgba(16, 185, 129, 0.5)", 
+                    backgroundColor: "rgba(16, 185, 129, 0.08)",
+                    boxShadow: "0 12px 24px -10px rgba(16, 185, 129, 0.2)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                  className={`flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm md:text-base cursor-pointer select-none ${floatClass}`}
+                  style={{ animationDelay: floatDelay }}
+                >
+                  <i className={`${skill.icon} text-lg md:text-xl`}></i>
+                  <span className="font-sans text-gray-200 font-normal">{skill.name}</span>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </div>

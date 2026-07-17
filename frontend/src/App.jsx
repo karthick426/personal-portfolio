@@ -6,6 +6,8 @@ import { API_BASE_URL } from './config';
 // Components
 import Navbar from './components/Navbar';
 import Intro from './components/Intro';
+import CustomCursor from './components/CustomCursor';
+import SectionIndicator from './components/SectionIndicator';
 
 // Pages
 import Home from './pages/Home';
@@ -45,7 +47,10 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className="bg-[#0A0A0A] dark:bg-[#0A0A0A] text-[#F5F5F5] dark:text-[#F5F5F5] min-h-screen font-sans selection:bg-[#10B981] selection:text-black">
+    <div className="custom-cursor bg-[#0A0A0A] dark:bg-[#0A0A0A] text-[#F5F5F5] dark:text-[#F5F5F5] min-h-screen font-sans selection:bg-[#10B981] selection:text-black" style={{ cursor: 'none' }}>
+      <CustomCursor />
+      {!location.pathname.startsWith('/admin') && <SectionIndicator />}
+
       <AnimatePresence mode="wait">
         {showIntro && <Intro onComplete={() => setShowIntro(false)} />}
       </AnimatePresence>

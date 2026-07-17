@@ -21,12 +21,36 @@ const Education = () => {
             </p>
           </div>
 
-          <div className="relative border-l border-gray-700 ml-4 md:ml-6 py-4 space-y-12">
+          <div className="relative ml-4 md:ml-6 py-4 space-y-12">
+            {/* Animated timeline line */}
+            <motion.div
+              className="absolute left-0 top-0 bottom-0 w-px bg-[#10B981]"
+              initial={{ scaleY: 0, originY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
+              style={{ transformOrigin: 'top' }}
+            />
+
             <div className="relative pl-8 md:pl-12">
-              {/* Timeline dot */}
-              <div className="absolute w-4 h-4 bg-neonCyan rounded-full -left-[9px] top-1 shadow-[0_0_10px_#64ffda]"></div>
+              {/* Timeline dot with pulse */}
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20, delay: 0.5 }}
+                className="absolute w-4 h-4 bg-[#10B981] rounded-full -left-[8px] top-1 shadow-[0_0_12px_rgba(16,185,129,0.7)]"
+              >
+                <span className="absolute inset-0 rounded-full bg-[#10B981] animate-ping opacity-40" />
+              </motion.div>
               
-              <div className="glass p-8 rounded-xl hover:-translate-y-1 transition-transform duration-300">
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="glass p-8 rounded-xl hover:-translate-y-1 transition-transform duration-300"
+              >
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                   <div>
                     <h3 className="text-2xl font-bold text-white">Bachelor of Engineering</h3>
@@ -55,7 +79,7 @@ const Education = () => {
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>

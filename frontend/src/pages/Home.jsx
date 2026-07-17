@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { API_BASE_URL } from '../config';
 import About from '../components/About';
 import Skills from '../components/Skills';
@@ -12,6 +12,8 @@ import Footer from '../components/Footer';
 import Terminal from '../components/Terminal';
 import BackgroundCanvas from '../components/BackgroundCanvas';
 import MagneticButton from '../components/MagneticButton';
+import TypewriterText from '../components/TypewriterText';
+import CountUp from '../components/CountUp';
 
 const DEFAULT_CONTENT = {
   hero: {
@@ -122,18 +124,23 @@ const Home = () => {
               Available for work
             </div>
 
-            {/* Clean White Title */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight font-sans">
-              Fullstack Developer.
+            {/* Typewriter Title */}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight font-sans min-h-[1.2em]">
+              <TypewriterText
+                roles={['Fullstack Developer', 'API Engineer', 'React Developer', 'Problem Solver']}
+                typingSpeed={75}
+                erasingSpeed={40}
+                pauseMs={2000}
+              />
             </h1>
 
             {/* Subtitle / Bio Paragraph */}
-            <p className="text-gray-400 max-w-xl mb-8 text-base md:text-lg leading-relaxed font-sans font-normal">
+            <p className="text-[#A1A1AA] max-w-xl mb-8 text-base md:text-lg leading-relaxed font-sans font-normal">
               Hi, I'm Karthick V, a fullstack developer in India building fast, accessible web experiences. I focus on modern JavaScript frameworks, API engineering, and clean, scalable database architectures.
             </p>
             
             {/* Outline & White Pill Action Buttons */}
-            <div className="flex items-center gap-4 mb-10 font-sans text-sm">
+            <div className="flex items-center gap-4 mb-8 font-sans text-sm">
               <MagneticButton range={35}>
                 <a 
                   href="#projects" 
@@ -145,12 +152,34 @@ const Home = () => {
               <MagneticButton range={35}>
                 <a 
                   href="#contact" 
-                  className="px-6 py-3 bg-white hover:bg-white/95 text-black font-semibold rounded-full flex items-center gap-2 shadow-lg transition-transform active:scale-95 animate-pulse"
+                  className="px-6 py-3 bg-[#10B981] hover:bg-[#34D399] text-black font-semibold rounded-full flex items-center gap-2 shadow-lg transition-transform active:scale-95"
                 >
                   Contact Me
                   <i className="fas fa-arrow-right text-xs"></i>
                 </a>
               </MagneticButton>
+            </div>
+
+            {/* Animated Stat Counters */}
+            <div className="flex items-center gap-8 mb-10 border-t border-white/5 pt-6">
+              {[
+                { target: 5, suffix: '+', label: 'Projects' },
+                { target: 8, suffix: '+', label: 'Technologies' },
+                { target: 2, suffix: '+', label: 'Years' },
+              ].map((stat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1 + i * 0.15, duration: 0.5 }}
+                  className="text-center"
+                >
+                  <div className="text-3xl font-bold text-[#10B981] font-mono">
+                    <CountUp target={stat.target} suffix={stat.suffix} duration={2000} />
+                  </div>
+                  <div className="text-xs text-[#A1A1AA] font-sans mt-1">{stat.label}</div>
+                </motion.div>
+              ))}
             </div>
 
             {/* Horizontal Brand Tech stack sliding carousel (shows 3 at a time) */}

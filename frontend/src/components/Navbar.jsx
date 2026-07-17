@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import MagneticButton from './MagneticButton';
@@ -10,6 +10,7 @@ const Navbar = () => {
     damping: 30,
     restDelta: 0.001
   });
+  const [hoveredLink, setHoveredLink] = useState(null);
 
   return (
     <>
@@ -52,9 +53,21 @@ const Navbar = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-gray-300 hover:text-white text-sm font-medium transition-colors tracking-wide font-sans"
+                    className="relative text-gray-300 hover:text-white text-sm font-medium tracking-wide font-sans pb-1 group"
+                    onMouseEnter={() => setHoveredLink(item.name)}
+                    onMouseLeave={() => setHoveredLink(null)}
                   >
                     {item.name}
+                    {hoveredLink === item.name && (
+                      <motion.span
+                        layoutId="navUnderline"
+                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#10B981] rounded-full"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        exit={{ scaleX: 0 }}
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
                   </a>
                 ))}
               </div>
