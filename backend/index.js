@@ -10,6 +10,7 @@ import contactRoutes from './routes/contact.js';
 import adminRoutes from './routes/admin.js';
 import analyticsRoutes from './routes/analytics.js';
 import contentRoutes from './routes/content.js';
+import aiRoutes from './routes/ai.js';
 
 dotenv.config();
 
@@ -50,6 +51,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/content', contentRoutes);
+app.use('/api/ai', aiRoutes);
 
 const PORT = process.env.PORT || 8080;
 
