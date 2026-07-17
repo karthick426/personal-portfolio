@@ -8,15 +8,14 @@
   body {
     font-family: 'Inter', sans-serif;
     @apply bg-white text-gray-900 dark:text-white transition-colors duration-300;
-    background-image: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.04) 0px, transparent 50%),
-                      radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.04) 0px, transparent 50%),
-                      radial-gradient(at 50% 100%, rgba(167, 139, 250, 0.03) 0px, transparent 50%);
+    background-image: radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.04) 0px, transparent 50%),
+                      radial-gradient(at 100% 0%, rgba(52, 211, 153, 0.03) 0px, transparent 50%);
     overflow-x: hidden;
   }
 
   /* Native dark mode background selector to prevent PostCSS HMR cache issues */
   .dark body {
-    background-color: #030712;
+    background-color: #0A0A0A;
   }
 
   /* Custom scrollbars */
@@ -24,21 +23,21 @@
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #030712;
+    background: #0A0A0A;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1f2937;
+    background: #1B1B1B;
     border-radius: 4px;
-    border: 2px solid #030712;
+    border: 2px solid #0A0A0A;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #38bdf8;
+    background: #10B981;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/[0.02] dark:bg-white/[0.01] backdrop-blur-md border border-white/[0.07] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+    @apply bg-[#1B1B1B]/30 backdrop-blur-md border border-white/[0.06] shadow-[0_8px_32px_0_rgba(0,0,0,0.45)];
   }
   
   .text-neon {
@@ -46,8 +45,8 @@
   }
 
   .neon-border-glow {
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
-    border-color: rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.2);
   }
 
   .perspective-1000 {
