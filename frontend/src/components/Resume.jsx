@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import RevealText from './RevealText';
 
 const Resume = () => {
   return (
@@ -11,12 +12,14 @@ const Resume = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            <span className="text-neonCyan font-mono mr-2">06.</span> Resume
-          </h2>
-          <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
-            Interested in working together? Download my resume to see my full experience, education, and skills.
-          </p>
+          <div className="text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+              <RevealText text="Resume" />
+            </h2>
+            <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+              Interested in working together? Download my resume to see my detailed academic background, skill mappings, and qualifications.
+            </p>
+          </div>
           
           <div className="glass p-8 md:p-12 rounded-2xl max-w-2xl mx-auto border border-neonCyan/20">
             <i className="far fa-file-pdf text-6xl text-neonCyan mb-6"></i>

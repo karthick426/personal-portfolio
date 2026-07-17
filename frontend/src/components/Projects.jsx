@@ -1,21 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { API_BASE_URL } from '../config';
+import RevealText from './RevealText';
 
 const ProjectCard = ({ project, idx }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - left) / width - 0.5;
+    const y = (e.clientY - top) / height - 0.5;
+    setTilt({ x: -y * 18, y: x * 18 });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    setIsFlipped(false);
+  };
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: (idx % 6) * 0.1 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: (idx % 3) * 0.1 }}
       className="perspective-1000 w-full h-[280px] cursor-pointer group"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       onClick={() => setIsFlipped(!isFlipped)}
       onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
+      style={{ transformStyle: 'preserve-3d' }}
     >
-      <div className={`relative w-full h-full duration-700 preserve-3d transition-transform ${isFlipped ? 'rotate-y-180' : ''}`}>
+      <motion.div 
+        animate={{ 
+          rotateX: tilt.x,
+          rotateY: tilt.y + (isFlipped ? 180 : 0)
+        }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        className="relative w-full h-full preserve-3d"
+      >
         
         {/* Front Side */}
         <div className="absolute inset-0 backface-hidden glass p-6 rounded-lg flex flex-col justify-between hover:border-neonCyan/40 hover:shadow-[0_0_20px_rgba(167,139,250,0.15)] transition-all duration-300 select-none border border-transparent">
@@ -117,7 +141,7 @@ const ProjectCard = ({ project, idx }) => {
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
@@ -189,12 +213,14 @@ const Projects = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-white flex items-center flex-1">
-              <span className="text-neonCyan font-mono mr-2">04.</span> Projects
-              <div className="h-px bg-gray-700 w-full ml-4 max-w-xs"></div>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+              <RevealText text="Projects" />
             </h2>
-            <a href="https://github.com/karthick426" target="_blank" rel="noreferrer" className="text-neonCyan hover:underline font-mono text-sm">
+            <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-4">
+              A collection of web applications, systems, and key projects I have built
+            </p>
+            <a href="https://github.com/karthick426" target="_blank" rel="noreferrer" className="text-neonCyan hover:underline font-mono text-sm inline-block mt-2">
               View Full GitHub Profile &rarr;
             </a>
           </div>

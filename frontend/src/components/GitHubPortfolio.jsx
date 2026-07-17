@@ -32,12 +32,14 @@ const GitHubPortfolio = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="flex justify-between items-end mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white flex items-center">
-              <span className="text-neonCyan font-mono mr-2">05.</span> Other GitHub Projects
-              <div className="h-px bg-gray-700 w-full ml-4 max-w-[100px] md:max-w-xs"></div>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+              Other GitHub Projects
             </h2>
-            <a href="https://github.com/karthick426" target="_blank" rel="noreferrer" className="text-neonCyan hover:underline font-mono hidden md:block text-sm">
+            <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-4">
+              A list of repositories synced directly from my GitHub profile
+            </p>
+            <a href="https://github.com/karthick426" target="_blank" rel="noreferrer" className="text-neonCyan hover:underline font-mono text-sm inline-block mt-2">
               View Full Profile &rarr;
             </a>
           </div>

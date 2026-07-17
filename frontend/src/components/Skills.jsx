@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import RevealText from './RevealText';
 
 const Skills = () => {
   const allSkills = [
@@ -45,15 +46,9 @@ const Skills = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="relative">
           {/* Section title */}
-          <motion.h2 
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight"
-          >
-            Skills
-          </motion.h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+            <RevealText text="Skills" />
+          </h2>
           {/* Section subtitle */}
           <motion.p 
             initial={{ opacity: 0, y: -10 }}

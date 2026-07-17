@@ -11,6 +11,7 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Terminal from '../components/Terminal';
 import BackgroundCanvas from '../components/BackgroundCanvas';
+import MagneticButton from '../components/MagneticButton';
 
 const DEFAULT_CONTENT = {
   hero: {
@@ -133,19 +134,23 @@ const Home = () => {
             
             {/* Outline & White Pill Action Buttons */}
             <div className="flex items-center gap-4 mb-10 font-sans text-sm">
-              <a 
-                href="#projects" 
-                className="px-6 py-3 border border-white/20 hover:border-white text-white font-medium rounded-full transition-all"
-              >
-                See my works
-              </a>
-              <a 
-                href="#contact" 
-                className="px-6 py-3 bg-white hover:bg-white/95 text-black font-semibold rounded-full flex items-center gap-2 shadow-lg transition-transform active:scale-95"
-              >
-                Contact Me
-                <i className="fas fa-arrow-right text-xs"></i>
-              </a>
+              <MagneticButton range={35}>
+                <a 
+                  href="#projects" 
+                  className="px-6 py-3 border border-white/20 hover:border-white text-white font-medium rounded-full transition-all"
+                >
+                  See my works
+                </a>
+              </MagneticButton>
+              <MagneticButton range={35}>
+                <a 
+                  href="#contact" 
+                  className="px-6 py-3 bg-white hover:bg-white/95 text-black font-semibold rounded-full flex items-center gap-2 shadow-lg transition-transform active:scale-95 animate-pulse"
+                >
+                  Contact Me
+                  <i className="fas fa-arrow-right text-xs"></i>
+                </a>
+              </MagneticButton>
             </div>
 
             {/* Horizontal Brand Tech stack sliding carousel (shows 3 at a time) */}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { API_BASE_URL } from '../config';
+import RevealText from './RevealText';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -54,11 +55,14 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <p className="text-neonCyan font-mono mb-4 text-sm">07. What's Next?</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Get In Touch</h2>
-          <p className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
-            I'm currently looking for new opportunities. Whether you have a question, a project idea, or just want to say hi, I'll try my best to get back to you!
-          </p>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+              <RevealText text="Get In Touch" />
+            </h2>
+            <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+              I'm currently looking for new opportunities. Whether you have a project idea, want to collaborate, or just say hi, feel free to drop a message!
+            </p>
+          </div>
 
           <div className="glass p-8 md:p-10 rounded-xl text-left max-w-3xl mx-auto">
             {status === 'success' && (

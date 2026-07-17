@@ -15,9 +15,9 @@ const Footer = ({ data }) => {
               <i className="fab fa-linkedin text-2xl"></i>
             </a>
           )}
-          {data?.twitter && (
-            <a href={data.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-neonCyan transition-colors">
-              <i className="fab fa-twitter text-2xl"></i>
+          {data?.phone && (
+            <a href={`https://wa.me/${data.phone.replace(/[^0-9]/g, "").replace(/^([0-9]{10})$/, "91$1")}`} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#25D366] transition-colors">
+              <i className="fab fa-whatsapp text-2xl"></i>
             </a>
           )}
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import RevealText from './RevealText';
 
 const About = ({ data, personalInfo }) => {
   return (
@@ -11,10 +12,14 @@ const About = ({ data, personalInfo }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center">
-            <span className="text-gray-400 font-mono mr-2">01.</span> About Me
-            <div className="h-px bg-gray-700 w-full ml-4 max-w-xs"></div>
-          </h2>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+              <RevealText text="About Me" />
+            </h2>
+            <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+              A brief overview of my background, focus, and key details
+            </p>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="flex flex-col">
