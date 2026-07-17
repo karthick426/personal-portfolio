@@ -52,7 +52,7 @@ const Skills = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight"
           >
-            Tools I Build With
+            Skills
           </motion.h2>
           {/* Section subtitle */}
           <motion.p 
