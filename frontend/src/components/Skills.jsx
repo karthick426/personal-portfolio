@@ -72,7 +72,7 @@ const Skills = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center">
-            <span className="text-neonCyan font-mono mr-2">02.</span> My Skills
+            <span className="text-gray-400 font-mono mr-2">02.</span> My Skills
             <div className="h-px bg-gray-700 w-full ml-4 max-w-xs"></div>
           </h2>
 
@@ -84,7 +84,7 @@ const Skills = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: catIdx * 0.15 }}
-                className="glass p-6 rounded-xl border border-transparent hover:border-neonCyan/20 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] transition-all duration-300 flex flex-col h-full"
+                className="glass p-6 rounded-xl border border-transparent hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-all duration-300 flex flex-col h-full"
               >
                 <h3 className="text-xl font-bold text-white mb-8 text-center border-b border-gray-800/80 pb-4 tracking-wide font-sans">
                   {category.title}
@@ -93,14 +93,14 @@ const Skills = () => {
                 <div className="flex flex-col gap-4 flex-grow justify-center">
                   {category.skills.map((skill, sIdx) => {
                     const strokeDashoffset = circumference - (skill.level / 100) * circumference;
-                    const iconClass = skillIcons[skill.name] || "fas fa-check text-neonCyan text-xl";
+                    const iconClass = skillIcons[skill.name] || "fas fa-check text-white text-xl";
 
                     return (
                       <motion.div 
                         key={sIdx}
                         whileHover={{ x: 6, scale: 1.01 }}
                         transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                        className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5 hover:border-neonCyan/25 hover:bg-white/10 transition-colors duration-300"
+                        className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-colors duration-300"
                       >
                         {/* Left: Icon & Name */}
                         <div className="flex items-center gap-3.5">
@@ -128,7 +128,7 @@ const Skills = () => {
                               cx="24" 
                               cy="24" 
                               r={radius} 
-                              className="text-neonCyan" 
+                              className="text-white" 
                               strokeWidth={strokeWidth} 
                               stroke="currentColor" 
                               fill="transparent" 
@@ -139,7 +139,7 @@ const Skills = () => {
                               transition={{ duration: 1.5, ease: "easeOut", delay: sIdx * 0.1 }}
                             />
                           </svg>
-                          <span className="absolute text-[10px] font-mono text-neonCyan font-bold">{skill.level}%</span>
+                          <span className="absolute text-[10px] font-mono text-gray-200 font-bold">{skill.level}%</span>
                         </div>
                       </motion.div>
                     );

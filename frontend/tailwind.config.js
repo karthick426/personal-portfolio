@@ -8,11 +8,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        darkNav: '#080816',
+        darkNav: '#040409',
         darkBg: '#040409',
-        neonCyan: '#a78bfa',
-        neonPurple: '#8b5cf6',
-        neonPink: '#f43f5e'
+        neonCyan: '#ffffff',
+        neonPurple: '#d4d4d4',
+        neonPink: '#737373'
       }
     },
   },
