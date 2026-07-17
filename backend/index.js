@@ -28,18 +28,8 @@ if (process.env.FRONTEND_URL) {
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl)
-      if (!origin) return callback(null, true);
-      
-      const isAllowed = allowedOrigins.includes(origin) || 
-                        origin.endsWith('.vercel.app');
-                        
-      if (isAllowed) {
-        callback(null, true);
-      } else {
-        console.error(`[CORS Blocked] Rejected Origin: ${origin}`);
-        callback(new Error(`Not allowed by CORS: ${origin}`));
-      }
+      // Dynamically reflect the origin to allow all deployment domains (Vercel, custom domains, local testing)
+      callback(null, true);
     },
     credentials: true
   })
