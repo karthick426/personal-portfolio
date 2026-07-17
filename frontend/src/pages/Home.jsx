@@ -12,7 +12,6 @@ import Footer from '../components/Footer';
 import Terminal from '../components/Terminal';
 import BackgroundCanvas from '../components/BackgroundCanvas';
 import Stats from '../components/Stats';
-import AiChatbot from '../components/AiChatbot';
 
 const DEFAULT_CONTENT = {
   hero: {
@@ -175,9 +174,6 @@ const Home = () => {
       <Resume />
       <Contact />
       <Footer data={content.personal_info} />
-
-      {/* Floating AI portfolio assistant chatbot */}
-      <AiChatbot />
     </div>
   );
 };

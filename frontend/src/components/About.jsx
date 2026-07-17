@@ -21,15 +21,6 @@ const About = ({ data, personalInfo }) => {
               <p className="text-gray-400 text-lg leading-relaxed mb-8 whitespace-pre-wrap">
                 {data?.bio || "I am a passionate Computer Science and Engineering student at Shree Venkateshwara Hi-Tech Engineering College, pursuing my B.E. with a focus on modern web development and software engineering. I specialize in building responsive, interactive, and high-performance applications using React, Node.js, Express, and MySQL. With a strong foundation in core concepts like Data Structures, DBMS, and Web Technologies, combined with continuous learning in AI, Cloud Computing, and Prompt Engineering, I am dedicated to crafting clean code and premium digital solutions that solve real-world problems."}
               </p>
-              
-              <div className="max-w-md w-full rounded-xl overflow-hidden border border-gray-800 shadow-2xl group relative hidden md:block mt-6">
-                <div className="absolute inset-0 bg-neonCyan/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="Developer Setup" 
-                  className="w-full h-48 object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105" 
-                />
-              </div>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
