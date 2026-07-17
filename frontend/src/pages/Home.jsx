@@ -154,10 +154,10 @@ const Home = () => {
                 {visibleTechs.map((tech) => (
                   <motion.div 
                     key={tech.name}
-                    initial={{ opacity: 0, x: 25, scale: 0.85 }}
+                    initial={{ opacity: 0, x: 30, scale: 0.85 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: -25, scale: 0.85 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                    exit={{ opacity: 0, x: -30, scale: 0.85 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className="group relative w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 hover:border-white/20 hover:scale-110 transition-all duration-300 cursor-pointer"
                   >
                     <i className={`${tech.icon} text-xl`}></i>
