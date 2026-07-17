@@ -32,6 +32,11 @@ function App() {
   const [showIntro, setShowIntro] = useState(true);
   const location = useLocation();
 
+  // Force dark mode on mount
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+  }, []);
+
   // Bypass intro if directly loading admin panel
   useEffect(() => {
     if (location.pathname.startsWith('/admin')) {
