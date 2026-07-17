@@ -11,7 +11,6 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Terminal from '../components/Terminal';
 import BackgroundCanvas from '../components/BackgroundCanvas';
-import Stats from '../components/Stats';
 
 const DEFAULT_CONTENT = {
   hero: {
@@ -162,9 +161,6 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Statistics Section */}
-      <Stats />
 
       {/* Other sections */}
       <About data={content.about} personalInfo={content.personal_info} />
