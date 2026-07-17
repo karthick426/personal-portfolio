@@ -1,20 +1,41 @@
-import mysql from "mysql2/promise";
+import pg from "pg";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const dbConfig = {
-  host: process.env.DB_HOST || process.env.MYSQLHOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || process.env.MYSQLPORT || '3306'),
-  user: process.env.DB_USER || process.env.MYSQLUSER || 'root',
-  password: process.env.DB_PASSWORD || process.env.MYSQLPASSWORD || '',
-  database: process.env.DB_NAME || process.env.MYSQLDATABASE || 'railway',
-  waitForConnections: true,
-  connectionLimit: 10,
-};
+const { Pool } = pg;
 
-console.log(`DB connecting → host: ${dbConfig.host}, port: ${dbConfig.port}, db: ${dbConfig.database}`);
+const poolConfig = process.env.DATABASE_URL
+  ? {
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    }
+  : {
+      host: process.env.DB_HOST || "localhost",
+      port: parseInt(process.env.DB_PORT || "5432"),
+      user: process.env.DB_USER || "postgres",
+      password: process.env.DB_PASSWORD || "",
+      database: process.env.DB_NAME || "portfolio_db",
+    };
 
-const pool = mysql.createPool(dbConfig);
+if (process.env.DATABASE_URL) {
+  console.log('DB connecting to PostgreSQL via connection string...');
+} else {
+  console.log(`DB connecting to PostgreSQL → host: ${poolConfig.host}, port: ${poolConfig.port}, db: ${poolConfig.database}`);
+}
+
+const pool = new Pool(poolConfig);
+
+// Startup connection test
+pool.connect((err, client, release) => {
+  if (err) {
+    console.error("Error connecting to PostgreSQL:", err.message);
+  } else {
+    console.log("Connected to PostgreSQL");
+    release();
+  }
+});
 
 export default pool;

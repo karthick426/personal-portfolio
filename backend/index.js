@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import db from './config/db.js';
 import { initializeDatabase } from './config/dbInit.js';
-import { startGitHubSyncScheduler } from './config/githubSync.js';
+import { startGitHubSyncScheduler } from './services/githubSync.js';
 
 // Import Routes
 import contactRoutes from './routes/contact.js';

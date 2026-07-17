@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "name": "ArticleX",
+    "description": "A personal development project showcasing clean code and modern web practices.",
+    "technologies": [
+      "TypeScript"
+    ],
+    "features": [],
+    "live_demo": "",
+    "repository": "https://github.com/karthick426/ArticleX",
+    "screenshots": [],
+    "stars": 0,
+    "updated_at": "2026-06-22T06:26:33Z"
+  },
+  {
+    "id": 2,
+    "name": "foot_fusion",
+    "description": "A personal development project showcasing clean code and modern web practices.",
+    "technologies": [
+      "JavaScript"
+    ],
+    "features": [],
+    "live_demo": "",
+    "repository": "https://github.com/karthick426/foot_fusion",
+    "screenshots": [],
+    "stars": 0,
+    "updated_at": "2026-06-18T06:26:54Z"
+  },
+  {
+    "id": 3,
+    "name": "personal-portfolio",
+    "description": "A modern, responsive developer portfolio built with React, Vite, and TailwindCSS, deployed on Vercel.",
+    "technologies": [
+      "React",
+      "Node.js",
+      "MySQL",
+      "Vercel",
+      "Railway"
+    ],
+    "features": [
+      "Dynamic GitHub Sync",
+      "Admin CMS Panel",
+      "Contact Form with Email",
+      "Dark Aesthetic Design"
+    ],
+    "live_demo": "https://karthickv.vercel.app",
+    "repository": "https://github.com/karthick426/personal-portfolio",
+    "screenshots": [],
+    "stars": 0,
+    "updated_at": "2026-06-13T03:30:36Z"
+  },
+  {
+    "id": 4,
+    "name": "task_management",
+    "description": "A full-featured task management application for organizing and tracking personal or team tasks.",
+    "technologies": [
+      "React",
+      "Node.js",
+      "Express",
+      "MySQL"
+    ],
+    "features": [
+      "Task Creation & Assignment",
+      "Priority Levels",
+      "Status Tracking",
+      "Deadline Management"
+    ],
+    "live_demo": "",
+    "repository": "https://github.com/karthick426/task_management",
+    "screenshots": [],
+    "stars": 0,
+    "updated_at": "2026-06-13T03:15:25Z"
+  },
+  {
+    "id": 5,
+    "name": "sk_escapes",
+    "description": "A dynamic travel planning and escape room booking web application featuring interactive travel cards, customizable itineraries, and a fully responsive client interface.",
+    "technologies": [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Vercel"
+    ],
+    "features": [
+      "Dynamic Booking System",
+      "Interactive Travel Cards",
+      "Responsive Booking Form",
+      "Modern UI Animations"
+    ],
+    "live_demo": "https://sk-escapes.vercel.app",
+    "repository": "https://github.com/karthick426/sk_escapes",
+    "screenshots": [],
+    "stars": 0,
+    "updated_at": "2026-06-05T16:24:50Z"
+  },
+  {
+    "id": 6,
+    "name": "snake_game",
+    "description": "A retro browser-based classic Snake Game built with HTML5 Canvas and JavaScript.",
+    "technologies": [
+      "HTML5 Canvas",
+      "CSS3",
+      "JavaScript"
+    ],
+    "features": [
+      "Classic Grid Movement",
+      "Real-time Score Counter",
+      "Dynamic Difficulty Progression",
+      "Responsive Layout"
+    ],
+    "live_demo": "",
+    "repository": "https://github.com/karthick426/snake_game",
+    "screenshots": [],
+    "stars": 0,
+    "updated_at": "2026-04-23T17:33:04Z"
+  }
+]

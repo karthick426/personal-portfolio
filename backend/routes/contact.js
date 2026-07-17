@@ -42,10 +42,11 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const [result] = await db.execute(
-      'INSERT INTO contacts (name, email, subject, message) VALUES (?, ?, ?, ?)',
+    const { rows } = await db.query(
+      'INSERT INTO contacts (name, email, subject, message) VALUES ($1, $2, $3, $4) RETURNING id',
       [name, email, subject, message]
     );
+    const insertId = rows[0].id;
 
     // Send email notification via Resend API (asynchronously)
     sendEmail({
@@ -64,8 +65,8 @@ router.post('/', async (req, res) => {
               <tr><td style="padding: 8px 0; font-weight: bold; color: #475569;">Subject:</td><td style="padding: 8px 0; color: #0f172a;">${subject}</td></tr>
             </table>
             <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; margin-top: 20px;">
-              <h4 style="margin: 0 0 10px 0; color: #475569; font-size: 14px;">Message</h4>
-              <p style="margin: 0; white-space: pre-wrap; color: #1e293b;">${message}</p>
+               <h4 style="margin: 0 0 10px 0; color: #475569; font-size: 14px;">Message</h4>
+               <p style="margin: 0; white-space: pre-wrap; color: #1e293b;">${message}</p>
             </div>
           </div>
           <div style="background-color: #f1f5f9; padding: 16px; text-align: center; border-top: 1px solid #e2e8f0;">
@@ -79,7 +80,7 @@ router.post('/', async (req, res) => {
       console.error('❌ Resend email failed:', emailErr.message);
     });
 
-    res.status(201).json({ success: true, message: 'Message sent successfully', id: result.insertId });
+    res.status(201).json({ success: true, message: 'Message sent successfully', id: insertId });
   } catch (error) {
     console.error('Contact submission error:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -89,7 +90,7 @@ router.post('/', async (req, res) => {
 // GET /api/contact
 router.get('/', async (req, res) => {
   try {
-    const [rows] = await db.execute('SELECT * FROM contacts ORDER BY created_at DESC');
+    const { rows } = await db.query('SELECT * FROM contacts ORDER BY created_at DESC');
     res.json(rows);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });

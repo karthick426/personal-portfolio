@@ -41,3 +41,5 @@ CREATE TABLE IF NOT EXISTS visitors (
 
 -- Insert a default admin account (password is 'admin123' hashed with bcrypt)
 INSERT IGNORE INTO admins (username, email, password) VALUES ('admin', 'admin@example.com', '$2b$10$QO0R8S5K3ZgXWd5.sOq92uL5Y2z/r8u6Q5.O5Y2z/r8u6Q5.O5Y2z/r8u6Q5'); 
+SELECT * FROM portfolio_db.contacts 
+ORDER BY created_at DESC;

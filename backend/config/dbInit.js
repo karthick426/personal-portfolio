@@ -6,7 +6,7 @@ export async function initializeDatabase() {
     // 1. Create Admins Table
     await db.query(`
       CREATE TABLE IF NOT EXISTS admins (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         username VARCHAR(50) NOT NULL UNIQUE,
         email VARCHAR(100) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
@@ -16,14 +16,15 @@ export async function initializeDatabase() {
 
     // Insert Default Admin (username: admin, password: admin123)
     await db.query(`
-      INSERT IGNORE INTO admins (username, email, password) 
+      INSERT INTO admins (username, email, password) 
       VALUES ('admin', 'admin@example.com', '$2b$10$QO0R8S5K3ZgXWd5.sOq92uL5Y2z/r8u6Q5.O5Y2z/r8u6Q5.O5Y2z/r8u6Q5')
+      ON CONFLICT (username) DO NOTHING
     `);
 
     // 2. Create Contacts Table
     await db.query(`
       CREATE TABLE IF NOT EXISTS contacts (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL,
         subject VARCHAR(200) NOT NULL,
@@ -35,7 +36,7 @@ export async function initializeDatabase() {
     // 3. Create Certificates Table
     await db.query(`
       CREATE TABLE IF NOT EXISTS certificates (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         title VARCHAR(150) NOT NULL,
         issuer VARCHAR(100) NOT NULL,
         issue_date VARCHAR(50) NOT NULL,
@@ -47,7 +48,7 @@ export async function initializeDatabase() {
     // 4. Create Resume Downloads Table
     await db.query(`
       CREATE TABLE IF NOT EXISTS resume_downloads (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         download_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         ip_address VARCHAR(45)
       )
@@ -56,7 +57,7 @@ export async function initializeDatabase() {
     // 5. Create Visitors Table
     await db.query(`
       CREATE TABLE IF NOT EXISTS visitors (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         visit_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         page_visited VARCHAR(255)
       )
@@ -65,10 +66,10 @@ export async function initializeDatabase() {
     // 6. Create Portfolio Content Table
     await db.query(`
       CREATE TABLE IF NOT EXISTS portfolio_content (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         section VARCHAR(50) NOT NULL UNIQUE,
-        content JSON NOT NULL,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        content JSONB NOT NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
 
@@ -135,9 +136,27 @@ export async function initializeDatabase() {
 
     for (const item of seedSections) {
       await db.query(
-        `INSERT IGNORE INTO portfolio_content (section, content) VALUES (?, ?)`,
+        `INSERT INTO portfolio_content (section, content) VALUES ($1, $2) ON CONFLICT (section) DO NOTHING`,
         [item.section, JSON.stringify(item.content)]
       );
+    }
+
+    // 8. Sync sequences to prevent duplicate key errors after manual inserts/imports
+    const tables = ['admins', 'contacts', 'certificates', 'resume_downloads', 'visitors', 'portfolio_content'];
+    for (const table of tables) {
+      try {
+        const seqCheck = await db.query(`
+          SELECT c.relname FROM pg_class c 
+          JOIN pg_namespace n ON n.oid = c.relnamespace 
+          WHERE c.relkind = 'S' AND c.relname = $1
+        `, [`${table}_id_seq`]);
+        
+        if (seqCheck.rows.length > 0) {
+          await db.query(`SELECT setval('${table}_id_seq', COALESCE((SELECT MAX(id) FROM ${table}), 0) + 1, false)`);
+        }
+      } catch (seqErr) {
+        console.warn(`Could not sync sequence for ${table}:`, seqErr.message);
+      }
     }
 
     console.log('Database initialization completed successfully.');
