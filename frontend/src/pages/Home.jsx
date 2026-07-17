@@ -135,8 +135,18 @@ const Home = () => {
                 { icon: "fab fa-git-alt text-[#f05032]", name: "Git" },
                 { icon: "fab fa-figma text-[#f24e1e]", name: "Figma" }
               ].map((tech, idx) => (
-                <div 
+                <motion.div 
                   key={idx} 
+                  animate={{
+                    x: [0, 3, 0, -3, 0],
+                    y: [0, -3, 0, 3, 0]
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                    delay: idx * 0.4
+                  }}
                   className="group relative w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 hover:border-white/20 hover:scale-110 transition-all duration-300 cursor-pointer"
                 >
                   <i className={`${tech.icon} text-xl`}></i>
@@ -144,7 +154,7 @@ const Home = () => {
                   <span className="absolute bottom-14 scale-0 group-hover:scale-100 transition-all duration-200 bg-[#080816] text-neonCyan text-[11px] font-mono font-bold px-2.5 py-1 rounded-md border border-neonCyan/20 whitespace-nowrap shadow-[0_4px_12px_rgba(167,139,250,0.15)] pointer-events-none z-20">
                     {tech.name}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
