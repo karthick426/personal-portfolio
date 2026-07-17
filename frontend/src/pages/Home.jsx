@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { API_BASE_URL } from '../config';
 import About from '../components/About';
 import Skills from '../components/Skills';
@@ -34,6 +34,20 @@ const DEFAULT_CONTENT = {
 
 const Home = () => {
   const [content, setContent] = useState(null);
+  const [currentTechIndex, setCurrentTechIndex] = useState(0);
+
+  const allTechs = [
+    { icon: "fab fa-java text-[#e76f51]", name: "Java" },
+    { icon: "fab fa-python text-[#3776ab]", name: "Python" },
+    { icon: "fab fa-js text-[#f7df1e]", name: "JavaScript" },
+    { icon: "fab fa-react text-[#61dafb]", name: "React" },
+    { icon: "fab fa-node-js text-[#68a063]", name: "Node.js" },
+    { icon: "fas fa-database text-[#336791]", name: "PostgreSQL" },
+    { icon: "fab fa-html5 text-[#e34f26]", name: "HTML5" },
+    { icon: "fab fa-css3-alt text-[#1572b6]", name: "CSS3" },
+    { icon: "fab fa-git-alt text-[#f05032]", name: "Git" },
+    { icon: "fab fa-figma text-[#f24e1e]", name: "Figma" }
+  ];
 
   useEffect(() => {
     // 5-second timeout — show default content if API unreachable
@@ -55,6 +69,19 @@ const Home = () => {
 
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTechIndex((prev) => (prev + 1) % allTechs.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [allTechs.length]);
+
+  const visibleTechs = [
+    allTechs[currentTechIndex],
+    allTechs[(currentTechIndex + 1) % allTechs.length],
+    allTechs[(currentTechIndex + 2) % allTechs.length]
+  ];
 
   if (!content) return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center text-neonCyan font-mono gap-4">
@@ -121,41 +148,26 @@ const Home = () => {
               </a>
             </div>
 
-            {/* Horizontal Brand Tech stack circles with name tooltips */}
-            <div className="flex flex-wrap items-center gap-3">
-              {[
-                { icon: "fab fa-java text-[#e76f51]", name: "Java" },
-                { icon: "fab fa-python text-[#3776ab]", name: "Python" },
-                { icon: "fab fa-js text-[#f7df1e]", name: "JavaScript" },
-                { icon: "fab fa-react text-[#61dafb]", name: "React" },
-                { icon: "fab fa-node-js text-[#68a063]", name: "Node.js" },
-                { icon: "fas fa-database text-[#336791]", name: "PostgreSQL" },
-                { icon: "fab fa-html5 text-[#e34f26]", name: "HTML5" },
-                { icon: "fab fa-css3-alt text-[#1572b6]", name: "CSS3" },
-                { icon: "fab fa-git-alt text-[#f05032]", name: "Git" },
-                { icon: "fab fa-figma text-[#f24e1e]", name: "Figma" }
-              ].map((tech, idx) => (
-                <motion.div 
-                  key={idx} 
-                  animate={{
-                    x: [0, 3, 0, -3, 0],
-                    y: [0, -3, 0, 3, 0]
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear",
-                    delay: idx * 0.4
-                  }}
-                  className="group relative w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 hover:border-white/20 hover:scale-110 transition-all duration-300 cursor-pointer"
-                >
-                  <i className={`${tech.icon} text-xl`}></i>
-                  {/* Floating Tooltip displaying skill name */}
-                  <span className="absolute bottom-14 scale-0 group-hover:scale-100 transition-all duration-200 bg-[#080816] text-neonCyan text-[11px] font-mono font-bold px-2.5 py-1 rounded-md border border-neonCyan/20 whitespace-nowrap shadow-[0_4px_12px_rgba(167,139,250,0.15)] pointer-events-none z-20">
-                    {tech.name}
-                  </span>
-                </motion.div>
-              ))}
+            {/* Horizontal Brand Tech stack sliding carousel (shows 3 at a time) */}
+            <div className="flex items-center gap-3 overflow-hidden h-16 select-none">
+              <AnimatePresence mode="popLayout">
+                {visibleTechs.map((tech) => (
+                  <motion.div 
+                    key={tech.name}
+                    initial={{ opacity: 0, x: 25, scale: 0.85 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -25, scale: 0.85 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                    className="group relative w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 hover:border-white/20 hover:scale-110 transition-all duration-300 cursor-pointer"
+                  >
+                    <i className={`${tech.icon} text-xl`}></i>
+                    {/* Floating Tooltip displaying skill name */}
+                    <span className="absolute bottom-14 scale-0 group-hover:scale-100 transition-all duration-200 bg-[#080816] text-neonCyan text-[11px] font-mono font-bold px-2.5 py-1 rounded-md border border-neonCyan/20 whitespace-nowrap shadow-[0_4px_12px_rgba(167,139,250,0.15)] pointer-events-none z-20">
+                      {tech.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </motion.div>
 
