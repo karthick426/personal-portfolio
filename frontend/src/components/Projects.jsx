@@ -189,7 +189,7 @@ const Projects = () => {
 
   if (loading && projects.length === 0) {
     return (
-      <div className="py-20 bg-black flex justify-center items-center">
+      <div className="py-20 bg-[#0A0A0A] flex justify-center items-center">
         <i className="fas fa-spinner fa-spin text-3xl text-neonCyan"></i>
       </div>
     );
@@ -205,7 +205,7 @@ const Projects = () => {
     : projects.filter(project => (project.technologies || []).includes(filter));
 
   return (
-    <section id="projects" className="py-20 bg-black transition-colors duration-300">
+    <section id="projects" className="py-20 bg-[#0A0A0A] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

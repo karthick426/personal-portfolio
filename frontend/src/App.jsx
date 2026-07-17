@@ -45,7 +45,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className="bg-black dark:bg-black bg-white text-gray-900 dark:text-white min-h-screen font-sans selection:bg-teal-600 dark:selection:bg-neonCyan selection:text-white dark:selection:text-black">
+    <div className="bg-[#0A0A0A] dark:bg-[#0A0A0A] text-[#F5F5F5] dark:text-[#F5F5F5] min-h-screen font-sans selection:bg-[#10B981] selection:text-black">
       <AnimatePresence mode="wait">
         {showIntro && <Intro onComplete={() => setShowIntro(false)} />}
       </AnimatePresence>

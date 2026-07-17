@@ -19,7 +19,7 @@ const Navbar = () => {
         style={{ scaleX }} 
       />
 
-      <nav className="fixed w-full z-50 top-0 transition-all duration-300 bg-[#030712]/90 border-b border-white/5 backdrop-blur-md py-4">
+      <nav className="fixed w-full z-50 top-0 transition-all duration-300 bg-[#121212]/95 border-b border-white/5 backdrop-blur-md py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14">
             

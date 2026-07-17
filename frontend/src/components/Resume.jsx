@@ -4,7 +4,7 @@ import RevealText from './RevealText';
 
 const Resume = () => {
   return (
-    <section id="resume" className="py-20 bg-[#020617] relative">
+    <section id="resume" className="py-20 bg-[#0A0A0A] relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
