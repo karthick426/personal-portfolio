@@ -7,8 +7,30 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
-    @apply bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300;
+    @apply bg-white text-gray-900 dark:text-white transition-colors duration-300;
+    background-image: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%),
+                      radial-gradient(at 50% 0%, rgba(244, 63, 94, 0.03) 0px, transparent 50%);
     overflow-x: hidden;
+  }
+
+  /* Native dark mode background selector to prevent PostCSS HMR cache issues */
+  .dark body {
+    background-color: #040409;
+  }
+
+  /* Custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #040409;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #8b5cf6;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a78bfa;
   }
 }
 
@@ -18,8 +40,13 @@
   }
   
   .text-neon {
-    @apply text-teal-600 dark:text-neonCyan;
-    text-shadow: 0 0 5px rgba(100, 255, 218, 0.5);
+    @apply text-violet-600 dark:text-neonCyan;
+    text-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+  }
+
+  .neon-border-glow {
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+    border-color: rgba(167, 139, 250, 0.2);
   }
 
   .perspective-1000 {

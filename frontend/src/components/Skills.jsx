@@ -36,7 +36,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-[#020617]">
+    <section id="skills" className="py-20 bg-darkNav">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -51,7 +51,12 @@ const Skills = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {skillCategories.map((category, idx) => (
-              <div key={idx} className="glass p-8 rounded-xl hover:border-neonCyan/50 transition-colors duration-300">
+              <motion.div 
+                key={idx} 
+                whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(167, 139, 250, 0.4)', boxShadow: "0 10px 30px -10px rgba(139, 92, 246, 0.3)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="glass p-8 rounded-xl border border-transparent"
+              >
                 <h3 className="text-xl font-bold text-white mb-6 text-center">{category.title}</h3>
                 <div className="space-y-6">
                   {category.skills.map((skill, sIdx) => (
@@ -60,19 +65,19 @@ const Skills = () => {
                         <span className="text-gray-300 font-medium">{skill.name}</span>
                         <span className="text-neonCyan text-sm">{skill.level}%</span>
                       </div>
-                      <div className="w-full bg-gray-800 rounded-full h-2.5">
+                      <div className="w-full bg-gray-800/60 rounded-full h-2.5">
                         <motion.div 
                           className="bg-neonCyan h-2.5 rounded-full"
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.2 }}
+                          transition={{ duration: 1.2, ease: "easeOut", delay: sIdx * 0.05 }}
                         ></motion.div>
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>

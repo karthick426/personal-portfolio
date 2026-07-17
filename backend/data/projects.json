@@ -1,34 +1,6 @@
 [
   {
     "id": 1,
-    "name": "ArticleX",
-    "description": "A personal development project showcasing clean code and modern web practices.",
-    "technologies": [
-      "TypeScript"
-    ],
-    "features": [],
-    "live_demo": "",
-    "repository": "https://github.com/karthick426/ArticleX",
-    "screenshots": [],
-    "stars": 0,
-    "updated_at": "2026-06-22T06:26:33Z"
-  },
-  {
-    "id": 2,
-    "name": "foot_fusion",
-    "description": "A personal development project showcasing clean code and modern web practices.",
-    "technologies": [
-      "JavaScript"
-    ],
-    "features": [],
-    "live_demo": "",
-    "repository": "https://github.com/karthick426/foot_fusion",
-    "screenshots": [],
-    "stars": 0,
-    "updated_at": "2026-06-18T06:26:54Z"
-  },
-  {
-    "id": 3,
     "name": "personal-portfolio",
     "description": "A modern, responsive developer portfolio built with React, Vite, and TailwindCSS, deployed on Vercel.",
     "technologies": [
@@ -48,7 +20,35 @@
     "repository": "https://github.com/karthick426/personal-portfolio",
     "screenshots": [],
     "stars": 0,
-    "updated_at": "2026-06-13T03:30:36Z"
+    "updated_at": "2026-07-17T17:38:19Z"
+  },
+  {
+    "id": 2,
+    "name": "ArticleX",
+    "description": "A personal development project showcasing clean code and modern web practices.",
+    "technologies": [
+      "TypeScript"
+    ],
+    "features": [],
+    "live_demo": "",
+    "repository": "https://github.com/karthick426/ArticleX",
+    "screenshots": [],
+    "stars": 0,
+    "updated_at": "2026-06-22T06:26:33Z"
+  },
+  {
+    "id": 3,
+    "name": "foot_fusion",
+    "description": "A personal development project showcasing clean code and modern web practices.",
+    "technologies": [
+      "JavaScript"
+    ],
+    "features": [],
+    "live_demo": "",
+    "repository": "https://github.com/karthick426/foot_fusion",
+    "screenshots": [],
+    "stars": 0,
+    "updated_at": "2026-06-18T06:26:54Z"
   },
   {
     "id": 4,

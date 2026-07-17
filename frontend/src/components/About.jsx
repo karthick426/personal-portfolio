@@ -33,49 +33,77 @@ const About = ({ data, personalInfo }) => {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a 
+              <motion.a 
                 href={personalInfo?.location_url || `https://www.google.com/maps/place/${encodeURIComponent(personalInfo?.location || "Tiruppur")}`}
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="glass p-6 rounded-lg hover:-translate-y-2 transition-transform duration-300 block cursor-pointer"
+                whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(167, 139, 250, 0.4)', boxShadow: "0 10px 30px -10px rgba(139, 92, 246, 0.3)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="glass p-6 rounded-lg block cursor-pointer border border-transparent"
               >
                 <i className="fas fa-map-marker-alt text-neonCyan text-2xl mb-4"></i>
                 <h3 className="text-white font-semibold">Location</h3>
                 <p className="text-gray-400 hover:text-neonCyan transition-colors">{personalInfo?.location || "India"}</p>
-              </a>
-              <a 
+              </motion.a>
+              <motion.a 
                 href={`mailto:${personalInfo?.email || "v.karthick406@gmail.com"}`}
-                className="glass p-6 rounded-lg hover:-translate-y-2 transition-transform duration-300 block cursor-pointer"
+                whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(167, 139, 250, 0.4)', boxShadow: "0 10px 30px -10px rgba(139, 92, 246, 0.3)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="glass p-6 rounded-lg block cursor-pointer border border-transparent"
               >
                 <i className="fas fa-envelope text-neonCyan text-2xl mb-4"></i>
                 <h3 className="text-white font-semibold">Email</h3>
                 <p className="text-gray-400 text-sm break-all hover:text-neonCyan transition-colors">{personalInfo?.email || "karthick@example.com"}</p>
-              </a>
-              <div className="glass p-6 rounded-lg hover:-translate-y-2 transition-transform duration-300">
+              </motion.a>
+              <motion.div 
+                whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(167, 139, 250, 0.4)', boxShadow: "0 10px 30px -10px rgba(139, 92, 246, 0.3)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="glass p-6 rounded-lg border border-transparent"
+              >
                 <i className="fas fa-graduation-cap text-neonCyan text-2xl mb-4"></i>
                 <h3 className="text-white font-semibold">Degree</h3>
                 <p className="text-gray-400">{personalInfo?.degree || "B.E. CSE"}</p>
-              </div>
-              <div className="glass p-6 rounded-lg hover:-translate-y-2 transition-transform duration-300">
+              </motion.div>
+              <motion.div 
+                whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(167, 139, 250, 0.4)', boxShadow: "0 10px 30px -10px rgba(139, 92, 246, 0.3)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="glass p-6 rounded-lg border border-transparent"
+              >
                 <i className="fas fa-calendar-alt text-neonCyan text-2xl mb-4"></i>
                 <h3 className="text-white font-semibold">Graduation</h3>
                 <p className="text-gray-400">{personalInfo?.graduation || "May 2027"}</p>
-              </div>
-              <a href={personalInfo?.github || "#"} target="_blank" rel="noopener noreferrer" className="glass p-6 rounded-lg hover:-translate-y-2 transition-transform duration-300 block cursor-pointer">
+              </motion.div>
+              <motion.a 
+                href={personalInfo?.github || "#"} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(167, 139, 250, 0.4)', boxShadow: "0 10px 30px -10px rgba(139, 92, 246, 0.3)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="glass p-6 rounded-lg block cursor-pointer border border-transparent"
+              >
                 <i className="fab fa-github text-neonCyan text-2xl mb-4"></i>
                 <h3 className="text-white font-semibold">GitHub</h3>
                 <p className="text-gray-400 text-sm truncate hover:text-neonCyan transition-colors">View Profile &rarr;</p>
-              </a>
-              <a href={personalInfo?.linkedin || "#"} target="_blank" rel="noopener noreferrer" className="glass p-6 rounded-lg hover:-translate-y-2 transition-transform duration-300 block cursor-pointer">
+              </motion.a>
+              <motion.a 
+                href={personalInfo?.linkedin || "#"} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(167, 139, 250, 0.4)', boxShadow: "0 10px 30px -10px rgba(139, 92, 246, 0.3)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="glass p-6 rounded-lg block cursor-pointer border border-transparent"
+              >
                 <i className="fab fa-linkedin text-neonCyan text-2xl mb-4"></i>
                 <h3 className="text-white font-semibold">LinkedIn</h3>
                 <p className="text-gray-400 text-sm truncate hover:text-neonCyan transition-colors">Connect &rarr;</p>
-              </a>
-              <a 
+              </motion.a>
+              <motion.a 
                 href={`https://wa.me/${(personalInfo?.phone || "8760466232").replace(/[^0-9]/g, "").replace(/^([0-9]{10})$/, "91$1")}`}
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="glass p-6 rounded-lg hover:-translate-y-2 transition-transform duration-300 block cursor-pointer sm:col-span-2 border border-neonCyan/20 hover:border-neonCyan/60"
+                whileHover={{ y: -8, scale: 1.01, borderColor: 'rgba(167, 139, 250, 0.6)', boxShadow: "0 10px 35px -10px rgba(139, 92, 246, 0.4)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="glass p-6 rounded-lg block cursor-pointer sm:col-span-2 border border-neonCyan/20"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
@@ -87,7 +115,7 @@ const About = ({ data, personalInfo }) => {
                   </div>
                   <span className="text-neonCyan text-sm font-mono">Chat Now &rarr;</span>
                 </div>
-              </a>
+              </motion.a>
             </div>
           </div>
         </motion.div>

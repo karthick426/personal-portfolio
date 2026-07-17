@@ -93,7 +93,7 @@ const Intro = ({ onComplete }) => {
         {/* Dynamic central dividing line */}
         <motion.div 
           variants={lineVariants}
-          className="h-[2px] bg-neonCyan shadow-[0_0_8px_#64ffda] my-2"
+          className="h-[2px] bg-neonCyan shadow-[0_0_8px_#a78bfa] my-2"
         />
 
         {/* Animated Subtitle */}

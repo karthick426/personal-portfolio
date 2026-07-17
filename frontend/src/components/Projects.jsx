@@ -18,7 +18,7 @@ const ProjectCard = ({ project, idx }) => {
       <div className={`relative w-full h-full duration-700 preserve-3d transition-transform ${isFlipped ? 'rotate-y-180' : ''}`}>
         
         {/* Front Side */}
-        <div className="absolute inset-0 backface-hidden glass p-6 rounded-lg flex flex-col justify-between hover:border-neonCyan/30 transition-all duration-300 select-none">
+        <div className="absolute inset-0 backface-hidden glass p-6 rounded-lg flex flex-col justify-between hover:border-neonCyan/40 hover:shadow-[0_0_20px_rgba(167,139,250,0.15)] transition-all duration-300 select-none border border-transparent">
           <div className="flex justify-between items-center mb-4">
             <i className="far fa-folder text-4xl text-neonCyan"></i>
             <div className="flex items-center space-x-4">
@@ -62,7 +62,7 @@ const ProjectCard = ({ project, idx }) => {
         </div>
 
         {/* Back Side */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 glass p-6 rounded-lg flex flex-col justify-between border-neonCyan/20 select-none">
+        <div className="absolute inset-0 backface-hidden rotate-y-180 glass p-6 rounded-lg flex flex-col justify-between border border-neonCyan/30 shadow-[0_0_25px_rgba(139,92,246,0.15)] select-none">
           <div className="flex flex-col h-full justify-between">
             <div>
               <div className="flex justify-between items-center mb-3">
