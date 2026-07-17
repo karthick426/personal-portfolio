@@ -1,63 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const [isDark, setIsDark] = useState(() => {
-    if (localStorage.theme === 'light') return false;
-    return true; 
-  });
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDark]);
-
   return (
-    <nav className="fixed w-full z-50 top-0 transition-all duration-300 glass py-4 bg-white/80 dark:bg-[#0a192f]/80">
+    <nav className="fixed w-full z-50 top-0 transition-all duration-300 bg-[#040409]/90 border-b border-white/5 backdrop-blur-md py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-12">
-          <div className="flex-shrink-0">
-            <Link to="/" className="text-2xl font-bold text-gray-900 dark:text-white tracking-wider">
-            </Link>
-          </div>
-          <div className="hidden md:flex items-center space-x-8">
-            <div className="flex items-baseline space-x-8">
-              {['Home', 'About', 'Skills', 'Education', 'Projects', 'Certifications', 'Resume', 'Contact'].map((item) => (
+        <div className="flex items-center justify-between h-14">
+          
+          {/* Logo Section: circular avatar + name */}
+          <Link to="/" className="flex items-center gap-3 select-none">
+            <div className="w-9 h-9 rounded-full overflow-hidden border border-white/10 shadow-inner">
+              <img 
+                src="/profile.png" 
+                alt="Karthick V" 
+                className="w-full h-full object-cover" 
+                onError={(e) => {
+                  e.target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+                }}
+              />
+            </div>
+            <span className="text-white font-semibold text-base tracking-wide font-sans">
+              Karthick V
+            </span>
+          </Link>
+
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center gap-8">
+            <div className="flex items-center gap-8">
+              {[
+                { name: 'Skills', href: '#skills' },
+                { name: 'Projects', href: '#projects' },
+                { name: 'Education', href: '#education' },
+                { name: 'Certifications', href: '#certifications' }
+              ].map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-neonCyan px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-300 hover:text-white text-sm font-medium transition-colors tracking-wide font-sans"
                 >
-                  {item}
+                  {item.name}
                 </a>
               ))}
             </div>
             
-            <button 
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full glass text-gray-600 dark:text-neonCyan hover:bg-gray-200 dark:hover:bg-neonCyan/10 transition-colors"
-              aria-label="Toggle Dark Mode"
+            {/* Pill shaped Contact Me Button */}
+            <a 
+              href="#contact" 
+              className="px-5 py-2.5 bg-white hover:bg-white/95 text-black font-semibold text-sm rounded-full flex items-center gap-2 shadow-lg transition-transform transform active:scale-95 tracking-wide font-sans"
             >
-              {isDark ? (
-                <i className="fas fa-sun text-lg"></i>
-              ) : (
-                <i className="fas fa-moon text-lg"></i>
-              )}
-            </button>
+              Contact Me
+              <i className="fas fa-arrow-right text-xs"></i>
+            </a>
           </div>
-          <div className="-mr-2 flex md:hidden items-center space-x-4">
-             <button 
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full glass text-gray-600 dark:text-neonCyan"
+
+          {/* Mobile Contact Toggle */}
+          <div className="md:hidden flex items-center">
+            <a 
+              href="#contact" 
+              className="px-4 py-2 bg-white text-black font-semibold text-xs rounded-full flex items-center gap-1.5 shadow-md"
             >
-              {isDark ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
-            </button>
+              Contact
+              <i className="fas fa-arrow-right text-[10px]"></i>
+            </a>
           </div>
+
         </div>
       </div>
     </nav>
