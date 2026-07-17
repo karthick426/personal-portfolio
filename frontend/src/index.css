@@ -8,14 +8,15 @@
   body {
     font-family: 'Inter', sans-serif;
     @apply bg-white text-gray-900 dark:text-white transition-colors duration-300;
-    background-image: radial-gradient(at 0% 0%, rgba(255, 255, 255, 0.02) 0px, transparent 50%),
-                      radial-gradient(at 50% 0%, rgba(255, 255, 255, 0.01) 0px, transparent 50%);
+    background-image: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.04) 0px, transparent 50%),
+                      radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.04) 0px, transparent 50%),
+                      radial-gradient(at 50% 100%, rgba(167, 139, 250, 0.03) 0px, transparent 50%);
     overflow-x: hidden;
   }
 
   /* Native dark mode background selector to prevent PostCSS HMR cache issues */
   .dark body {
-    background-color: #040409;
+    background-color: #030712;
   }
 
   /* Custom scrollbars */
@@ -23,30 +24,30 @@
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #040409;
+    background: #030712;
   }
   ::-webkit-scrollbar-thumb {
-    background: #404040;
+    background: #1f2937;
     border-radius: 4px;
+    border: 2px solid #030712;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #737373;
+    background: #38bdf8;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/10 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-lg dark:shadow-none;
+    @apply bg-white/[0.02] dark:bg-white/[0.01] backdrop-blur-md border border-white/[0.07] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
   }
   
   .text-neon {
-    @apply text-white dark:text-neonCyan;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-neonCyan to-neonPurple;
   }
 
   .neon-border-glow {
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.2);
   }
 
   .perspective-1000 {
