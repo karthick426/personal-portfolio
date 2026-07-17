@@ -121,21 +121,29 @@ const Home = () => {
               </a>
             </div>
 
-            {/* Horizontal Brand Tech stack grid */}
-            <div className="flex items-center gap-3">
+            {/* Horizontal Brand Tech stack circles with name tooltips */}
+            <div className="flex flex-wrap items-center gap-3">
               {[
+                { icon: "fab fa-java text-[#e76f51]", name: "Java" },
+                { icon: "fab fa-python text-[#3776ab]", name: "Python" },
+                { icon: "fab fa-js text-[#f7df1e]", name: "JavaScript" },
                 { icon: "fab fa-react text-[#61dafb]", name: "React" },
                 { icon: "fab fa-node-js text-[#68a063]", name: "Node.js" },
-                { icon: "fab fa-js text-[#f7df1e]", name: "JavaScript" },
                 { icon: "fas fa-database text-[#336791]", name: "PostgreSQL" },
-                { icon: "fab fa-git-alt text-[#f05032]", name: "Git" }
+                { icon: "fab fa-html5 text-[#e34f26]", name: "HTML5" },
+                { icon: "fab fa-css3-alt text-[#1572b6]", name: "CSS3" },
+                { icon: "fab fa-git-alt text-[#f05032]", name: "Git" },
+                { icon: "fab fa-figma text-[#f24e1e]", name: "Figma" }
               ].map((tech, idx) => (
                 <div 
                   key={idx} 
-                  title={tech.name}
-                  className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
+                  className="group relative w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 hover:border-white/20 hover:scale-110 transition-all duration-300 cursor-pointer"
                 >
                   <i className={`${tech.icon} text-xl`}></i>
+                  {/* Floating Tooltip displaying skill name */}
+                  <span className="absolute bottom-14 scale-0 group-hover:scale-100 transition-all duration-200 bg-[#080816] text-neonCyan text-[11px] font-mono font-bold px-2.5 py-1 rounded-md border border-neonCyan/20 whitespace-nowrap shadow-[0_4px_12px_rgba(167,139,250,0.15)] pointer-events-none z-20">
+                    {tech.name}
+                  </span>
                 </div>
               ))}
             </div>
