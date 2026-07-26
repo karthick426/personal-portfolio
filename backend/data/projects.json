@@ -1,6 +1,20 @@
 [
   {
     "id": 1,
+    "name": "MCQ_Generator",
+    "description": "A personal development project showcasing clean code and modern web practices.",
+    "technologies": [
+      "Java"
+    ],
+    "features": [],
+    "live_demo": "",
+    "repository": "https://github.com/karthick426/MCQ_Generator",
+    "screenshots": [],
+    "stars": 0,
+    "updated_at": "2026-07-20T14:33:58Z"
+  },
+  {
+    "id": 2,
     "name": "personal-portfolio",
     "description": "A modern, responsive developer portfolio built with React, Vite, and TailwindCSS, deployed on Vercel.",
     "technologies": [
@@ -20,10 +34,10 @@
     "repository": "https://github.com/karthick426/personal-portfolio",
     "screenshots": [],
     "stars": 0,
-    "updated_at": "2026-07-17T18:39:12Z"
+    "updated_at": "2026-07-17T19:27:45Z"
   },
   {
-    "id": 2,
+    "id": 3,
     "name": "ArticleX",
     "description": "A personal development project showcasing clean code and modern web practices.",
     "technologies": [
@@ -37,7 +51,7 @@
     "updated_at": "2026-06-22T06:26:33Z"
   },
   {
-    "id": 3,
+    "id": 4,
     "name": "foot_fusion",
     "description": "A personal development project showcasing clean code and modern web practices.",
     "technologies": [
@@ -51,7 +65,7 @@
     "updated_at": "2026-06-18T06:26:54Z"
   },
   {
-    "id": 4,
+    "id": 5,
     "name": "task_management",
     "description": "A full-featured task management application for organizing and tracking personal or team tasks.",
     "technologies": [
@@ -73,7 +87,7 @@
     "updated_at": "2026-06-13T03:15:25Z"
   },
   {
-    "id": 5,
+    "id": 6,
     "name": "sk_escapes",
     "description": "A dynamic travel planning and escape room booking web application featuring interactive travel cards, customizable itineraries, and a fully responsive client interface.",
     "technologies": [
@@ -95,7 +109,7 @@
     "updated_at": "2026-06-05T16:24:50Z"
   },
   {
-    "id": 6,
+    "id": 7,
     "name": "snake_game",
     "description": "A retro browser-based classic Snake Game built with HTML5 Canvas and JavaScript.",
     "technologies": [
